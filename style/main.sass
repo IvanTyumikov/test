@@ -31,6 +31,16 @@ body.active
 
 header, main, footer, .header, .main-menu__desktop
 	width: 100%
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active
+	transition: background-color 5000s ease-in-out 0s
+
+header
+	&:hover
+		.header, .main-menu__desktop
+			background: #fff
+			box-shadow: none
+
 .header
 	display: flex
 	flex-direction: column
@@ -41,7 +51,6 @@ header, main, footer, .header, .main-menu__desktop
 	z-index: 4
 	background: rgba(255, 255, 255, 0.9)
 	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.132586)
-	overflow: hidden
 	&_mobile
 		display: none
 	.header__wrapper
@@ -63,28 +72,27 @@ header, main, footer, .header, .main-menu__desktop
 				align-items: center
 				cursor: pointer
 				position: relative
-				&:hover
-					p
-						color: #F08B98
-						white-space: nowrap
-						height: 19px
-						&::after
-							border: 2px solid#F08B98
 				.select
 					display: inline-block
 					position: absolute
 					bottom: -22px
-					width: 24px
+					width: 28px
+					height: 15px
+					border-bottom: 1px solid #fff
+					opacity: 0
+					transition: .6s linear
 					&_left, &_right
 						position: inherit
-						background: #F08B98
-						width: 14px
+						background: #b53e4d
+						width: 20px
 						height: 1px
+						bottom: 6px
 					&_left
-						left: 0
+						left: -3px
+						transform: rotate(-45deg)
 					&_right
-						right: 0
-
+						right: -3px
+						transform: rotate(45deg)
 				svg
 					width: 30px
 					height: 32px
@@ -95,28 +103,55 @@ header, main, footer, .header, .main-menu__desktop
 					line-height: 19px
 					display: flex
 					align-items: center
-					&::after
-						content: ''
-						display: inline-block
-						border: 2px solid #000000
-						width: 8px
-						height: 2px
-						margin-left: 5px
+					white-space: nowrap
+					height: 19px
+					transition: .2s linear
+				.arrow
+					display: inline-block
+					width: 6px
+					height: 6px
+					margin-left: 10px
+					margin-top: -4px
+					border-top: 3px solid #000
+					border-right: 3px solid #000
+					transform: rotate(135deg)
+					transition: .2s linear
 				&:last-child p
 					&::after
 						content: ''
 						display: none
-
+			.blog
+				p
+					&:hover
+						color: #F08B98
+						transition: .2s linear
 		.login
-			width: 100%
-			max-width: 130px
-			display: flex
-			justify-content: space-between
-			align-items: center
-			margin: 0 15px
-			img
-				width: 30px
-				height: 26px
+			&_wrapper
+				width: 100%
+				max-width: 130px
+				display: flex
+				justify-content: space-between
+				align-items: center
+				margin: 0 15px
+			&__item
+				display: flex
+				flex-direction: column
+				align-items: center
+				justify-content: center
+				img
+					width: 30px
+					height: 26px
+					cursor: pointer
+				.active
+					display: none
+				.inactive
+					img
+						width: 25px
+				&:hover
+					.active
+						display: flex
+					.inactive
+						display: none
 
 .main-menu__desktop
 	display: flex
@@ -130,7 +165,7 @@ header, main, footer, .header, .main-menu__desktop
 	border-radius: 1px
 	padding: 30px 0
 	z-index: 3
-	top: 72px
+	top: 74px
 	opacity: 1
 	transition: .6s linear
 	&_wrapper
@@ -258,7 +293,16 @@ main
 						justify-content: flex-start
 						align-items: center
 						width: 100%
-						max-width: 100px
+						max-width: 120px
+						min-height: 150px
+						padding: 5px
+						box-sizing: border-box
+						border: 3px solid #fff
+						cursor: pointer
+						&:hover
+							border: 3px solid #F08B98
+							border-radius: 5px
+							box-shadow: 0px 0 5px rgba(0, 0, 0, 0.132586)
 						.item-preview
 							margin-bottom: 10px
 						.item-name
@@ -310,23 +354,26 @@ main
 		box-sizing: border-box
 		height: 560px
 		overflow-y: scroll
-		padding: 20px 30px
+		padding: 20px 30px 30px
 		border-radius: 15px
+		scrollbar-width: none
+		&::-webkit-scrollbar
+			width: 0
 		.popup-close
 			display: flex
 			justify-content: center
 			align-items: center
 			position: absolute
-			right: 15px
-			top: 23px
-			width: 30px
-			height: 30px
+			right: 30px
+			top: 30px
+			width: 15px
+			height: 15px
 			cursor: pointer
 			&:before, &:after
 				position: absolute
 				content: ' '
-				height: 25px
-				width: 1px
+				height: 20px
+				width: 2px
 				background-color: #000
 			&:before
 				transform: rotate(45deg)
@@ -349,6 +396,7 @@ main
 				margin-bottom: 5px
 				.label_name
 				.label_error
+					display: none
 					p
 						font-family: MuseoSansCyrl
 						font-size: 10px
@@ -357,7 +405,7 @@ main
 				display: flex
 				align-items: center
 				position: relative
-				&.phone
+				&.phone-length
 					max-width: 195px
 				input, textarea
 					position: relative
@@ -377,9 +425,9 @@ main
 						margin-bottom: 15px
 						cursor: pointer
 						background: #F08B98
-						color: #fff			
-						&:disabled							
-							opacity: 0.2						
+						color: #fff
+						&:disabled
+							opacity: 0.2
 							cursor: no-drop
 						&:hover
 							background: rgba(240,139,152,0.6)
@@ -387,12 +435,12 @@ main
 					border-radius: 25px
 					resize: none
 				.ico-error, .ico-ok
-					display: inline-block
 					width: 20px
 					height: 20px
 					position: absolute
 					right: 15px
-				.ico-error					
+				.ico-error
+					display: none
 					background-image: url(/assets/images/icons/error.svg)
 				.ico-ok
 					display: none
@@ -413,6 +461,7 @@ main
 				display: inline-flex
 				align-items: center
 				user-select: none
+				cursor: pointer
 			.custom-checkbox+label::before
 				content: ''
 				display: inline-block
@@ -427,15 +476,15 @@ main
 				background-position: center center
 				background-size: 50% 50%
 			.custom-checkbox:checked+label::before
-			  border-color: #0b76ef
-			  background-color: #0b76ef
+			  border-color: #F08B98
+			  background-color: #F08B98
 			  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 .other-screen
 	height: 1000px
 
-@media screen and ( max-width: 900px )
-	.header
-		&_desctop
-			display: none
-		&_mobile
-			display: flex
+// @media screen and ( max-width: 900px )
+// 	.header
+// 		&_desctop
+// 			display: none
+// 		&_mobile
+// 			display: flex
