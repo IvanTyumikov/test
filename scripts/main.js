@@ -1,60 +1,117 @@
 $(document).ready(function () {
 	//Анимация меню
-	var lastProduct;
-	$('nav div').mouseenter(function () {
-		$('.main-menu__desktop.' + lastProduct).css({
-			opacity: 0,
-			top: -300 + 'px'
+	if ($(window).width() > 600) {
+		var lastProduct;
+		$('nav div').mouseenter(function () {
+			$('.main-menu__desktop.' + lastProduct).css({
+				opacity: 0,
+				top: -300 + 'px'
+			});
+			$('.' + lastProduct).children('.select').css('opacity', 0);
+			$('.' + lastProduct).children('.arrow').css({
+				transform: 'rotate(135deg)',
+				'margin-top': -4 + 'px',
+				'border-top': 3 + 'px solid #000',
+				'border-right': 3 + 'px solid #000'
+			});
+			$('.' + lastProduct).children('.item-name').css('color', '#000');
+			var product = $(this).attr('data-menu');
+			$('.main-menu__desktop.' + product).css({
+				opacity: 1,
+				top: 74 + 'px'
+			});
+			$('.' + product).children('.select').css('opacity', 1);
+			$('.' + product).children('.arrow').css({
+				transform: 'rotate(-45deg)',
+				'margin-top': 3 + 'px',
+				'border-top': 3 + 'px solid #F08B98',
+				'border-right': 3 + 'px solid #F08B98'
+			});
+			$('.' + product).children('.item-name').css('color', '#F08B98');
 		});
-		$('.' + lastProduct).children('.select').css('opacity', 0);
-		$('.' + lastProduct).children('.arrow').css({
-			transform: 'rotate(135deg)',
-			'margin-top': -4 + 'px',
-			'border-top': 3 +'px solid #000',
-			'border-right': 3 +'px solid #000'
+		$('nav div').mouseleave(function () {
+			lastProduct = $(this).attr('data-menu');
 		});
-		$('.' + lastProduct).children('.item-name').css('color', '#000');
-		var product = $(this).attr('data-menu');
-		$('.main-menu__desktop.' + product).css({
-			opacity: 1,
-			top: 74 + 'px'
+		$('header').mouseleave(function () {
+			$('.main-menu__desktop').css({
+				opacity: 0,
+				top: -300 + 'px'
+			});
+			$('.select').css('opacity', 0);
+			$('.arrow').css({
+				transform: 'rotate(135deg)',
+				'margin-top': -4 + 'px',
+				'border-top': 3 + 'px solid #000',
+				'border-right': 3 + 'px solid #000'
+			});
+			$('nav .item-name').css('color', '#000');
 		});
-		$('.' + product).children('.select').css('opacity', 1);
-		$('.' + product).children('.arrow').css({
-			transform: 'rotate(-45deg)',
-			'margin-top': 3 + 'px',
-			'border-top': 3 +'px solid #F08B98',
-			'border-right': 3 +'px solid #F08B98'
+	} else {
+		//Мобильная версия
+		$('.header__top .icon-menu').on('click', function () {
+			$('.header__mobile_content').toggleClass('active');
 		});
-		$('.' + product).children('.item-name').css('color', '#F08B98');
-	});
-	$('nav div').mouseleave(function () {
-		lastProduct = $(this).attr('data-menu');
-	});
-	$('header').mouseleave(function () {
-		$('.main-menu__desktop').css({
-			opacity: 0,
-			top: -300 + 'px'
+		var lastProduct;
+		$('nav div').on('click', function () {
+			// $('.main-menu__desktop.' + lastProduct).css({
+			// 	opacity: 0,
+			// 	top: -300 + 'px'
+			// });
+			// $('.' + lastProduct).children('.select').css('opacity', 0);
+			// $('.' + lastProduct).children('.arrow').css({
+			// 	transform: 'rotate(135deg)',
+			// 	'margin-top': -4 + 'px',
+			// 	'border-top': 3 + 'px solid #000',
+			// 	'border-right': 3 + 'px solid #000'
+			// });
+			// $('.' + lastProduct).children('.item-name').css('color', '#000');
+			var product = $(this).attr('data-menu');
+			$('.main-menu__mobile.' + product).children('.main-menu__desktop_wrapper').css({
+				'display': 'flex'
+			});
+			$('.' + product).children('.arrow').css({
+				'transform': 'rotate(135deg)',				
+				'border-top': 3 + 'px solid #F08B98',
+				'border-right': 3 + 'px solid #F08B98'
+			});
+			$('.' + product).children('.item-name').css('color', '#F08B98');
 		});
-		$('.select').css('opacity', 0);
-		$('.arrow').css({
-			transform: 'rotate(135deg)',
-			'margin-top': -4 + 'px',
-			'border-top': 3 +'px solid #000',
-			'border-right': 3 +'px solid #000'
+		$('nav div').mouseleave(function () {
+			lastProduct = $(this).attr('data-menu');
 		});
-		$('nav .item-name').css('color', '#000');
-	});
+		$('header').mouseleave(function () {
+			$('.main-menu__desktop').css({
+				opacity: 0,
+				top: -300 + 'px'
+			});
+			$('.select').css('opacity', 0);
+			$('.arrow').css({
+				transform: 'rotate(135deg)',
+				'margin-top': -4 + 'px',
+				'border-top': 3 + 'px solid #000',
+				'border-right': 3 + 'px solid #000'
+			});
+			$('nav .item-name').css('color', '#000');
+		});
+	}
 
 	//Скроллинг видео
 	$(window).on('scroll', function () {
 		var scrollCoef = 0.0035;
-		$('.main-screen__overlay').css({
-			opacity: 1 - $(window).scrollTop() * scrollCoef
-		})
-		$('.main-screen video').css({
-			opacity: 1 - $(window).scrollTop() * scrollCoef
-		})
+		if ($(this).width() > 600) {
+			scrollCoef = 0.0035;
+			$('.main-screen__overlay').css({
+				opacity: 1 - $(window).scrollTop() * scrollCoef
+			})
+			$('.main-screen video').css({
+				opacity: 1 - $(window).scrollTop() * scrollCoef
+			})
+		} else {
+			$('.main-screen__overlay').css({
+				opacity: 1 - $(window).scrollTop() * scrollCoef
+			})
+		}
+
 	});
 
 	//Открытие поп-апа

@@ -121,8 +121,8 @@ header
 						content: ''
 						display: none
 			.blog
-				p
-					&:hover
+				&:hover
+					p
 						color: #F08B98
 						transition: .2s linear
 		.login
@@ -165,7 +165,7 @@ header
 	border-radius: 1px
 	padding: 30px 0
 	z-index: 3
-	top: 74px
+	top: -300px
 	opacity: 1
 	transition: .6s linear
 	&_wrapper
@@ -214,6 +214,8 @@ main
 		display: flex
 		position: relative
 		height: 100vh
+		&__mobile
+			display: none
 		video
 			position: fixed
 			top: 0
@@ -239,6 +241,7 @@ main
 			.main-topper
 				height: 74px
 				width: 100%
+				flex: 0 0 auto
 			.main-offer
 				display: flex
 				flex-direction: column
@@ -269,10 +272,11 @@ main
 				justify-content: center
 				align-items: center
 				background: #fff
-				border-top-left-radius: 15px
-				border-top-right-radius: 15px
+				border-top-left-radius: 30px
+				border-top-right-radius: 30px
 				padding: 25px
 				width: 100%
+				box-sizing: border-box
 				.top-product
 					&__header
 						margin-bottom: 33px
@@ -287,6 +291,7 @@ main
 						justify-content: space-between
 						width: 100%
 						max-width: 1000px
+						flex-wrap: wrap
 					&__item
 						display: flex
 						flex-direction: column
@@ -295,6 +300,7 @@ main
 						width: 100%
 						max-width: 120px
 						min-height: 150px
+						flex: 0 0 auto
 						padding: 5px
 						box-sizing: border-box
 						border: 3px solid #fff
@@ -488,3 +494,185 @@ main
 // 			display: none
 // 		&_mobile
 // 			display: flex
+
+@media screen and ( max-width: 599px )
+	header
+		.header
+			padding: 0
+			&__wrapper
+				nav
+					div
+						.arrow
+							transform: rotate(45deg)
+			&_desktop
+				display: none
+			&_mobile
+				display: flex
+			&__top
+				display: flex
+				width: 100%
+				justify-content: space-between
+				align-items: center
+				padding: 10px
+				position: relative
+				background: #fff
+				z-index: 3
+				.icon-menu
+					cursor: pointer
+					padding: 5px
+				.basket
+					cursor: pointer
+					padding: 5px
+					max-width: 30px
+					flex: 0 0 30px
+					img
+						width: 100%
+						height: 100%
+			&__mobile_content
+				position: absolute
+				top: -3000px
+				background: #fff
+				width: 100%
+				height: 100vh
+				transition: 1s linear
+				z-index: 2
+				padding: 0 10px
+				box-sizing: border-box
+				overflow-y: scroll			
+				&.active
+					top: 73px
+				.login
+					display: flex
+					justify-content: space-around
+					padding: 10px 0
+					&_item
+						cursor: pointer
+						width: 100%
+						display: flex
+						justify-content: center
+						align-items: center
+						img
+							width: 25px
+						&:nth-child(2)
+							border-left: 1px solid #EAEAEA
+							border-right: 1px solid #EAEAEA
+				nav
+					flex-direction: column
+					&>div
+						padding: 24px 15px
+						justify-content: space-between !important
+					.blog
+						&:hover
+							p
+								color: #000 !important
+					.cosmetics
+						border-top: 2px solid #F08B98
+					.decoration
+						border-top: 1px solid #EAEAEA
+						border-bottom: 1px solid #EAEAEA
+					.equipment
+						border-bottom: 2px solid #F08B98
+
+					.main-menu__mobile
+						.main-menu__desktop
+							&_wrapper
+								display: none
+								flex-direction: column
+								margin: 0
+								.inload
+									width: 100%
+									img
+										width: 100%
+										height: 100%
+										object-fit: contain
+							&_item								
+								margin: 0
+								padding: 0
+								width: 100%
+								border: none
+								.item__header
+									width: 100%
+									padding: 15px 0
+									border-bottom: 1px solid #EAEAEA
+									display: flex
+									align-items: center
+									justify-content: center
+									margin: 0
+								.item__links
+									display: none
+									a
+										margin: 0
+										padding: 20px 0
+	main
+		.main-screen
+			height: auto
+			&__desktop
+				display: none
+			&__overlay
+				background: url(/assets/images/mobile-back.png) top no-repeat
+				background-size: cover
+			&__content
+				width: auto
+				height: 100vh
+				padding: 0 10px
+				margin: 0
+				justify-content: flex-end
+				.main-offer
+					margin-bottom: 18%
+					p
+						font-size: 36px
+						line-height: 50px
+				.main-product
+					width: 300px
+					.top-product
+						&__header
+							margin-bottom: 0
+							p
+								font-size: 22px
+								line-height: 30px
+			&__mobile
+				display: flex
+				flex-direction: column
+				.top-product
+					&__list
+						display: flex
+						align-items: flex-start
+						justify-content: space-around
+						width: 100%
+						max-width: 1000px
+						flex-wrap: wrap
+						background: #fff
+						max-width: 300px
+						margin: 0 auto
+						position: relative
+						z-index: 2
+					&__item
+						display: flex
+						flex-direction: column
+						justify-content: flex-start
+						align-items: center
+						width: 100%
+						max-width: 120px
+						min-height: 150px
+						flex: 0 0 auto
+						padding: 5px
+						box-sizing: border-box
+						border: 3px solid #fff
+						cursor: pointer
+						&:hover
+							border: 3px solid #F08B98
+							border-radius: 5px
+							box-shadow: 0px 0 5px rgba(0, 0, 0, 0.132586)
+						.item-preview
+							margin-bottom: 10px
+						.item-name
+							p
+								font-family: MuseoSansCyrl
+								text-align: center
+								font-size: 14px
+
+	.callback-popup
+		&__wrapper
+			padding: 30px 30px 30px 10px
+			margin-top: 50px
+			border-radius: 0
