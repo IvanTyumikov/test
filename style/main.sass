@@ -83,7 +83,7 @@ header
 					transition: .6s linear
 					&_left, &_right
 						position: inherit
-						background: #b53e4d
+						background: #f08b98
 						width: 20px
 						height: 1px
 						bottom: 6px
@@ -116,6 +116,10 @@ header
 					border-right: 3px solid #000
 					transform: rotate(135deg)
 					transition: .2s linear
+					&.active
+						border-top: 3px solid #F08B98
+						border-right: 3px solid #F08B98
+						transform: rotate(135deg)
 				&:last-child p
 					&::after
 						content: ''
@@ -138,9 +142,12 @@ header
 				flex-direction: column
 				align-items: center
 				justify-content: center
+				width: 30px
+				height: 26px
 				img
-					width: 30px
-					height: 26px
+					width: 100%
+					height: 100%
+					object-fit: contain
 					cursor: pointer
 				.active
 					display: none
@@ -488,18 +495,11 @@ main
 .other-screen
 	height: 1000px
 
-// @media screen and ( max-width: 900px )
-// 	.header
-// 		&_desctop
-// 			display: none
-// 		&_mobile
-// 			display: flex
-
 @media screen and ( max-width: 599px )
 	header
 		.header
 			padding: 0
-			&__wrapper
+			.header__wrapper
 				nav
 					div
 						.arrow
@@ -508,6 +508,8 @@ main
 				display: none
 			&_mobile
 				display: flex
+				position: fixed
+				z-index: 10
 			&__top
 				display: flex
 				width: 100%
@@ -518,8 +520,40 @@ main
 				background: #fff
 				z-index: 3
 				.icon-menu
+					width: 23px
+					height: 13px
 					cursor: pointer
 					padding: 5px
+					position: relative
+					.close						
+						display: none
+						justify-content: center
+						align-items: center
+						position: absolute
+						right: 0
+						top: 0
+						bottom: 0
+						left: 0
+						margin: auto
+						width: 15px
+						height: 15px
+						cursor: pointer
+						&:before, &:after
+							position: absolute
+							content: ' '
+							height: 20px
+							width: 2px
+							background-color: #000
+						&:before
+							transform: rotate(45deg)
+						&:after
+							transform: rotate(-45deg)
+						&.active
+							display: flex
+					img
+						display: none
+						&.active
+							display: flex
 				.basket
 					cursor: pointer
 					padding: 5px
@@ -530,15 +564,15 @@ main
 						height: 100%
 			&__mobile_content
 				position: absolute
-				top: -3000px
+				top: -1000px
 				background: #fff
 				width: 100%
 				height: 100vh
-				transition: 1s linear
+				transition: .3s linear
 				z-index: 2
 				padding: 0 10px
 				box-sizing: border-box
-				overflow-y: scroll			
+				overflow-y: scroll
 				&.active
 					top: 73px
 				.login
@@ -560,7 +594,7 @@ main
 					flex-direction: column
 					&>div
 						padding: 24px 15px
-						justify-content: space-between !important
+						justify-content: space-between !important		
 					.blog
 						&:hover
 							p
@@ -572,6 +606,9 @@ main
 						border-bottom: 1px solid #EAEAEA
 					.equipment
 						border-bottom: 2px solid #F08B98
+					.item-name
+						&.active
+							color: #F08B98
 
 					.main-menu__mobile
 						.main-menu__desktop
@@ -579,13 +616,15 @@ main
 								display: none
 								flex-direction: column
 								margin: 0
+								&.active
+									display: flex
 								.inload
 									width: 100%
 									img
 										width: 100%
 										height: 100%
 										object-fit: contain
-							&_item								
+							&_item
 								margin: 0
 								padding: 0
 								width: 100%
@@ -598,8 +637,12 @@ main
 									align-items: center
 									justify-content: center
 									margin: 0
+									&.active
+										color: #F08B98
 								.item__links
 									display: none
+									&.active
+										display: flex
 									a
 										margin: 0
 										padding: 20px 0
@@ -672,7 +715,11 @@ main
 								font-size: 14px
 
 	.callback-popup
+		top: 73px		
 		&__wrapper
 			padding: 30px 30px 30px 10px
-			margin-top: 50px
+			margin-top: 73px
 			border-radius: 0
+			height: auto
+		&__overlay
+			display: none

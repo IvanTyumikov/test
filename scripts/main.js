@@ -50,48 +50,18 @@ $(document).ready(function () {
 		//Мобильная версия
 		$('.header__top .icon-menu').on('click', function () {
 			$('.header__mobile_content').toggleClass('active');
+			$(this).children('.close').toggleClass('active');
+			$(this).children('img').toggleClass('active');
 		});
-		var lastProduct;
 		$('nav div').on('click', function () {
-			// $('.main-menu__desktop.' + lastProduct).css({
-			// 	opacity: 0,
-			// 	top: -300 + 'px'
-			// });
-			// $('.' + lastProduct).children('.select').css('opacity', 0);
-			// $('.' + lastProduct).children('.arrow').css({
-			// 	transform: 'rotate(135deg)',
-			// 	'margin-top': -4 + 'px',
-			// 	'border-top': 3 + 'px solid #000',
-			// 	'border-right': 3 + 'px solid #000'
-			// });
-			// $('.' + lastProduct).children('.item-name').css('color', '#000');
 			var product = $(this).attr('data-menu');
-			$('.main-menu__mobile.' + product).children('.main-menu__desktop_wrapper').css({
-				'display': 'flex'
-			});
-			$('.' + product).children('.arrow').css({
-				'transform': 'rotate(135deg)',				
-				'border-top': 3 + 'px solid #F08B98',
-				'border-right': 3 + 'px solid #F08B98'
-			});
-			$('.' + product).children('.item-name').css('color', '#F08B98');
+			$('.main-menu__mobile.' + product).children('.main-menu__desktop_wrapper').toggleClass('active');
+			$('.' + product).children('.arrow').toggleClass('active');
+			$(this).children('.block-item').children('.item-name').toggleClass('active');
 		});
-		$('nav div').mouseleave(function () {
-			lastProduct = $(this).attr('data-menu');
-		});
-		$('header').mouseleave(function () {
-			$('.main-menu__desktop').css({
-				opacity: 0,
-				top: -300 + 'px'
-			});
-			$('.select').css('opacity', 0);
-			$('.arrow').css({
-				transform: 'rotate(135deg)',
-				'margin-top': -4 + 'px',
-				'border-top': 3 + 'px solid #000',
-				'border-right': 3 + 'px solid #000'
-			});
-			$('nav .item-name').css('color', '#000');
+		$('.main-menu__mobile .item__header').on('click', function () {
+			$(this).toggleClass('active');
+			$(this).next().toggleClass('active');
 		});
 	}
 
