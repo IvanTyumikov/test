@@ -105,7 +105,7 @@ $(document).ready(function () {
 
 	//Валидация формы
 	var validTokenName;
-	$('#client_name').focusout(function () {
+	$('#client_name').keyup(function () {
 		if ($('#client_name').val().length != 0) {
 			$('.callback-form__field.name .ico-error').css('display', 'none');
 			$('.callback-form__field.name .label_error').css('display', 'none');
@@ -124,7 +124,7 @@ $(document).ready(function () {
 		}
 	});
 	var validTokenPhone;
-	$('#client_phone').focusout(function () {
+	$('#client_phone').keyup(function () {
 		if ($('#client_phone').val().indexOf('_') == -1) {
 			$('.callback-form__field.phone .ico-error').css('display', 'none');
 			$('.callback-form__field.phone .label_error').css('display', 'none');
@@ -143,7 +143,7 @@ $(document).ready(function () {
 		}
 	});
 	var validTokenEmail;
-	$('#client_mail').focusout(function () {
+	$('#client_mail').keyup(function () {
 		if ($('#client_mail').val().indexOf('@') != -1 && $('#client_mail').val().indexOf('.') != -1) {
 			$('.callback-form__field.mail .ico-error').css('display', 'none');
 			$('.callback-form__field.mail .label_error').css('display', 'none');
