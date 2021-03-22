@@ -103,7 +103,7 @@ $(document).ready(function () {
 	//Маска для телефона (через плагин)
 	$('#client_phone').mask("+7(999) 999-9999");
 
-	//Валидация формы
+	//Валидация формы	
 	var validTokenName;
 	$('#client_name').keyup(function () {
 		if ($('#client_name').val().length != 0) {
@@ -143,8 +143,9 @@ $(document).ready(function () {
 		}
 	});
 	var validTokenEmail;
+	var test = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i;
 	$('#client_mail').keyup(function () {
-		if ($('#client_mail').val().indexOf('@') != -1 && $('#client_mail').val().indexOf('.') != -1) {
+		if (test.test($('#client_mail').val())) {
 			$('.callback-form__field.mail .ico-error').css('display', 'none');
 			$('.callback-form__field.mail .label_error').css('display', 'none');
 			$('.callback-form__field.mail .ico-ok').css('display', 'block');
