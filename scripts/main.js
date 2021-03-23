@@ -10,9 +10,9 @@ $(document).ready(function () {
 			$('.' + lastProduct).children('.select').css('opacity', 0);
 			$('.' + lastProduct).children('.arrow').css({
 				transform: 'rotate(135deg)',
-				'margin-top': -4 + 'px',
-				'border-top': 3 + 'px solid #000',
-				'border-right': 3 + 'px solid #000'
+				'margin-top': -3 + 'px',
+				'border-top': 2 + 'px solid #000',
+				'border-right': 2 + 'px solid #000'
 			});
 			$('.' + lastProduct).children('.item-name').css('color', '#000');
 			var product = $(this).attr('data-menu');
@@ -23,9 +23,9 @@ $(document).ready(function () {
 			$('.' + product).children('.select').css('opacity', 1);
 			$('.' + product).children('.arrow').css({
 				transform: 'rotate(-45deg)',
-				'margin-top': 3 + 'px',
-				'border-top': 3 + 'px solid #F08B98',
-				'border-right': 3 + 'px solid #F08B98'
+				'margin-top': 4 + 'px',
+				'border-top': 2 + 'px solid #F08B98',
+				'border-right': 2 + 'px solid #F08B98'
 			});
 			$('.' + product).children('.item-name').css('color', '#F08B98');
 		});
@@ -40,9 +40,9 @@ $(document).ready(function () {
 			$('.select').css('opacity', 0);
 			$('.arrow').css({
 				transform: 'rotate(135deg)',
-				'margin-top': -4 + 'px',
-				'border-top': 3 + 'px solid #000',
-				'border-right': 3 + 'px solid #000'
+				'margin-top': -3 + 'px',
+				'border-top': 2 + 'px solid #000',
+				'border-right': 2 + 'px solid #000'
 			});
 			$('nav .item-name').css('color', '#000');
 		});
@@ -52,6 +52,13 @@ $(document).ready(function () {
 			$('.header__mobile_content').toggleClass('active');
 			$(this).children('.close').toggleClass('active');
 			$(this).children('img').toggleClass('active');
+			if (!$(this).parent().hasClass('addShadow') && $('.callback-popup').css('display') != 'block') {
+				$(this).parent().toggleClass('active');
+			} else if (!$(this).parent().hasClass('addShadow') && $('.callback-popup').css('display') == 'block') {
+				$(this).parent().toggleClass('addShadow');
+			} else {
+				$(this).parent().toggleClass('addShadow');
+			}
 		});
 		$('nav div').on('click', function () {
 			var product = $(this).attr('data-menu');
@@ -79,6 +86,9 @@ $(document).ready(function () {
 		} else {
 			$('.main-screen__overlay').css({
 				opacity: 1 - $(window).scrollTop() * scrollCoef
+			});
+			$('.header__overlay').css({
+				opacity: 0 + $(window).scrollTop() * scrollCoef
 			})
 		}
 
@@ -88,16 +98,19 @@ $(document).ready(function () {
 	$('.popup-opener').on('click', function () {
 		let popup = '.' + $(this).attr('data-popup');
 		$('body').addClass('active');
-		$(popup).fadeIn(300);
+		$('.header__top').addClass('active').addClass('addShadow');
+		$(popup).fadeIn(0);
 	});
 	//Закрытие поп-апа
 	$('.overlay').on('click', function () {
-		$(this).parents('.popup').fadeOut(300);
+		$(this).parents('.popup').fadeOut(0);
 		$('body').removeClass('active');
+		$('.header__top').removeClass('active').removeClass('addShadow');
 	});
 	$('.popup-close').on('click', function () {
-		$(this).parents('.popup').fadeOut(300);
+		$(this).parents('.popup').fadeOut(0);
 		$('body').removeClass('active');
+		$('.header__top').removeClass('active').removeClass('addShadow');
 	});
 
 	//Маска для телефона (через плагин)
@@ -105,7 +118,7 @@ $(document).ready(function () {
 
 	//Валидация формы	
 	var validTokenName;
-	$('#client_name').keyup(function () {
+	$('#client_name').focusout(function () {
 		if ($('#client_name').val().length != 0) {
 			$('.callback-form__field.name .ico-error').css('display', 'none');
 			$('.callback-form__field.name .label_error').css('display', 'none');
@@ -124,7 +137,7 @@ $(document).ready(function () {
 		}
 	});
 	var validTokenPhone;
-	$('#client_phone').keyup(function () {
+	$('#client_phone').focusout(function () {
 		if ($('#client_phone').val().indexOf('_') == -1) {
 			$('.callback-form__field.phone .ico-error').css('display', 'none');
 			$('.callback-form__field.phone .label_error').css('display', 'none');
@@ -144,7 +157,7 @@ $(document).ready(function () {
 	});
 	var validTokenEmail;
 	var test = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i;
-	$('#client_mail').keyup(function () {
+	$('#client_mail').focusout(function () {
 		if (test.test($('#client_mail').val())) {
 			$('.callback-form__field.mail .ico-error').css('display', 'none');
 			$('.callback-form__field.mail .label_error').css('display', 'none');
